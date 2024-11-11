@@ -16,8 +16,8 @@ type Props = {
   onChangeText: (text: string) => void;
   keyboardType?: KeyboardTypeOptions;
   label: string;
-  secureTextEntery?: boolean;
-  error: string;
+  secureTextEntry?: boolean;
+  error?: string;
   password?: boolean;
   toggleSecure?: () => void;
 };
@@ -28,7 +28,7 @@ const CustomInputs = ({
   onChangeText,
   keyboardType,
   label,
-  secureTextEntery,
+  secureTextEntry,
   error,
   password,
   toggleSecure,
@@ -43,11 +43,12 @@ const CustomInputs = ({
           value={value}
           onChangeText={onChangeText}
           keyboardType={keyboardType}
-          secureTextEntry={secureTextEntery}
+          secureTextEntry={secureTextEntry}
+          autoCapitalize="none"
         />
         {password && (
           <TouchableOpacity onPress={toggleSecure}>
-            {secureTextEntery ? (
+            {secureTextEntry ? (
               <AntDesign name="eye" size={20} />
             ) : (
               <FontAwesome name="eye-slash" size={20} />

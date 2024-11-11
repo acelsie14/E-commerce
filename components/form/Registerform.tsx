@@ -1,35 +1,34 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import CustomInputs from './CustomInputs';
 import CustomButton from '../ui/CustomButton';
 import { validateEmail, validatePassword } from '@/utils';
-import { Href, Link } from 'expo-router';
-type Props = {
-  register?: boolean;
-};
-export const Loginform = ({ register }: Props) => {
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-    name: '',
-  });
+import { Link } from 'expo-router';
 
+const Registerform = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
-  const [errorName, setErrorName] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
   const [secure, setSecure] = useState(true);
 
   const toggleSecure = () => setSecure((prev) => !prev);
-
-  const handleChange = (inputName: string, text: string) => {
-    setValues((prev) => ({ ...prev, [inputName]: text }));
+  const handleFirstNameChange = (text: string) => {
+    setFirstName(text);
   };
-  const { email, password, name } = values;
+  const handleLastNameChange = (text: string) => {
+    setLastName(text);
+  };
+  const handleEmailChange = (text: string) => {
+    setEmail(text);
+  };
+  const handlePasswordChange = (text: string) => {
+    setPassword(text);
+  };
   const handleSubmit = () => {
-    // console.log({values});
-    if (register && name.trim() === '') {
-      setErrorName('Please enter your name');
-    }
+    console.log(password);
 
     if (!validateEmail(email)) {
       setErrorEmail('Enter a valid Email Address');
@@ -42,39 +41,42 @@ export const Loginform = ({ register }: Props) => {
       );
       return;
     }
-    setValues({
-      email: '',
-      password: '',
-      name: '',
-    });
+    console.log(email, password);
+    setEmail('');
+    setPassword('');
     setErrorEmail('');
     setErrorPassword('');
-    setErrorName('');
+    setFirstName('');
+    setLastName('');
   };
-  const disabled = email.trim() === '' || password.trim() === '';
-  const buttonTitle = register ? 'sign up' : 'sign in';
-  const dontAlready = register ? 'Already' : "Don't";
-  const registerLogin = register ? 'Login' : 'Register';
-  const href: Href<string | object> = register ? '/login' : '/register';
+  const disabled =
+    email.trim() === '' ||
+    password.trim() === '' ||
+    firstName.trim() === '' ||
+    lastName.trim() === '';
 
   return (
     <View style={styles.container}>
-      {register && (
-        <CustomInputs
-          label="Name"
-          placeholder="Enter your name"
-          keyboardType="default"
-          value={name}
-          onChangeText={(text) => handleChange('name', text)}
-          error={errorName}
-        />
-      )}
+      <CustomInputs
+        label="First name"
+        placeholder="Enter First Name"
+        keyboardType="default"
+        value={firstName}
+        onChangeText={handleFirstNameChange}
+      />
+      <CustomInputs
+        label="Last name"
+        placeholder="Enter Last Name"
+        keyboardType="default"
+        value={lastName}
+        onChangeText={handleLastNameChange}
+      />
       <CustomInputs
         label="Email"
         placeholder="Enter your Email"
         keyboardType="email-address"
         value={email}
-        onChangeText={(text) => handleChange('email', text)}
+        onChangeText={handleEmailChange}
         error={errorEmail}
       />
       <CustomInputs
@@ -82,26 +84,28 @@ export const Loginform = ({ register }: Props) => {
         placeholder="Enter your password"
         keyboardType="default"
         value={password}
-        onChangeText={(text) => handleChange('password', text)}
+        onChangeText={handlePasswordChange}
         error={errorPassword}
         secureTextEntry={secure}
         toggleSecure={toggleSecure}
         password
       />
       <CustomButton
-        buttonTitle={buttonTitle}
+        buttonTitle="Login"
         onPress={handleSubmit}
         disabled={disabled}
       />
-      <Link href={href} asChild>
+      <Link href="/login" asChild>
         <Text style={styles.account}>
-          {dontAlready} have an account?
-          <Text style={styles.RegisterText}>{registerLogin}</Text>
+          Do you have an account?
+          <Text style={styles.RegisterText}>Login</Text>
         </Text>
       </Link>
     </View>
   );
 };
+
+export default Registerform;
 
 const styles = StyleSheet.create({
   container: {
