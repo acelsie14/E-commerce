@@ -1,10 +1,12 @@
 import {
   KeyboardTypeOptions,
+  StyleProp,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
+  ViewStyle,
 } from 'react-native';
 import React from 'react';
 import { colors } from '@/constants';
@@ -15,11 +17,12 @@ type Props = {
   value: string;
   onChangeText: (text: string) => void;
   keyboardType?: KeyboardTypeOptions;
-  label: string;
+  label?: string;
   secureTextEntry?: boolean;
   error?: string;
   password?: boolean;
   toggleSecure?: () => void;
+  style?: StyleProp<ViewStyle>;
 };
 
 const CustomInputs = ({
@@ -32,11 +35,12 @@ const CustomInputs = ({
   error,
   password,
   toggleSecure,
+  style,
 }: Props) => {
   return (
-    <View>
-      <Text style={styles.label}>{label}</Text>
-      <View style={styles.container}>
+    <View style={{ flex: 1 }}>
+      {label && <Text style={styles.label}>{label}</Text>}
+      <View style={[styles.container, style]}>
         <TextInput
           style={styles.inputStyle}
           placeholder={placeholder}

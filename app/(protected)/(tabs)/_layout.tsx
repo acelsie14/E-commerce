@@ -18,6 +18,7 @@ export default function TabsLayout() {
             backgroundColor: colors.dark,
           },
           headerRight: () => <CartIcon />,
+          tabBarHideOnKeyboard: true,
         }}
       >
         <Tabs.Screen
