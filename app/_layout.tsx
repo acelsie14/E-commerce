@@ -3,6 +3,7 @@ import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { Toaster } from 'sonner-native';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const queryClient = new QueryClient();
 SplashScreen.preventAutoHideAsync();
@@ -17,13 +18,15 @@ export default function RootLayout() {
   }, [loaded]);
   if (!loaded) return null;
   return (
-    <QueryClientProvider client={queryClient}>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      />
-      <Toaster />
-    </QueryClientProvider>
+    <GestureHandlerRootView>
+      <QueryClientProvider client={queryClient}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        />
+        <Toaster />
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }

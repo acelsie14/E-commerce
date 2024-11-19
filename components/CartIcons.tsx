@@ -2,8 +2,10 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { colors } from '@/constants';
+import { useCartStore } from '@/lib/zustand/cart';
 
 const CartIcon = () => {
+  const cartItemLength = useCartStore((state) => state.items.length);
   const onPress = () => {
     // Navigate to the cart screen or perform any action when the cart icon is pressed
   };
@@ -14,7 +16,7 @@ const CartIcon = () => {
     >
       <AntDesign name="shoppingcart" color="white" size={23} />
       <View style={styles.abs}>
-        <Text style={{ fontSize: 10, color: 'white' }}>0</Text>
+        <Text style={{ fontSize: 10, color: 'white' }}>{cartItemLength}</Text>
       </View>
     </Pressable>
   );

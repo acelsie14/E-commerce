@@ -1,12 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { PropsWithChildren } from 'react';
 import { colors } from '@/constants';
+import React, { PropsWithChildren } from 'react';
+import { StyleSheet, View } from 'react-native';
 
-const Wrapper = ({ children }: PropsWithChildren) => {
+export const Wrapper = ({ children }: PropsWithChildren) => {
   return <View style={styles.container}>{children}</View>;
 };
-
-export default Wrapper;
 
 const styles = StyleSheet.create({
   container: {

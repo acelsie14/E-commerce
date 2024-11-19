@@ -1,10 +1,11 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 import { FlashList } from '@shopify/flash-list';
-import { ProductType } from '@/type';
-import ProductCard from './ui/ProductCard';
+import { ProductResponse } from '@/type';
+import { ProductCard } from './ui/ProductCard';
+
 type Props = {
-  data: ProductType[];
+  data: ProductResponse[];
 };
 const Products = ({ data }: Props) => {
   return (
@@ -17,6 +18,7 @@ const Products = ({ data }: Props) => {
         )}
         showsVerticalScrollIndicator={false}
         numColumns={2}
+        contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 5 }}
       />
     </View>
   );
