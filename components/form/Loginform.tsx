@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import CustomInputs from './CustomInputs';
 import CustomButton from '../ui/CustomButton';
 import { validateEmail, validatePassword } from '@/utils';
-import { Href, Link } from 'expo-router';
+import { Href, Link, useRouter } from 'expo-router';
 type Props = {
   register?: boolean;
 };
@@ -18,6 +18,7 @@ export const Loginform = ({ register }: Props) => {
   const [errorName, setErrorName] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
   const [secure, setSecure] = useState(true);
+  const router = useRouter();
 
   const toggleSecure = () => setSecure((prev) => !prev);
 
@@ -26,22 +27,29 @@ export const Loginform = ({ register }: Props) => {
   };
   const { email, password, name } = values;
   const handleSubmit = () => {
-    // console.log({values});
     if (register && name.trim() === '') {
       setErrorName('Please enter your name');
+      return;
     }
 
     if (!validateEmail(email)) {
       setErrorEmail('Enter a valid Email Address');
       return;
     }
-    console.log(validatePassword(password));
+
     if (!validatePassword(password)) {
       setErrorPassword(
         'Password must include at least one Uppercase letter, one lowercase letter,one number, and one special character.'
       );
       return;
     }
+    router.replace('/');
+    console.log({
+      email,
+      password,
+      name,
+    });
+
     setValues({
       email: '',
       password: '',
@@ -49,13 +57,12 @@ export const Loginform = ({ register }: Props) => {
     });
     setErrorEmail('');
     setErrorPassword('');
-    setErrorName('');
   };
   const disabled = email.trim() === '' || password.trim() === '';
   const buttonTitle = register ? 'sign up' : 'sign in';
   const dontAlready = register ? 'Already' : "Don't";
   const registerLogin = register ? 'Login' : 'Register';
-  const href: Href<string | object> = register ? '/login' : '/register';
+  const href: Href = register ? '/login' : '/register';
 
   return (
     <View style={styles.container}>

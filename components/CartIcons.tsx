@@ -3,12 +3,17 @@ import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { colors } from '@/constants';
 import { useCartStore } from '@/lib/zustand/cart';
+import { usePathname, useRouter } from 'expo-router';
 
 const CartIcon = () => {
   const cartItemLength = useCartStore((state) => state.items.length);
+  const router = useRouter();
+  const pathname = usePathname();
+  const isCartScreen = pathname === '/cart';
   const onPress = () => {
-    // Navigate to the cart screen or perform any action when the cart icon is pressed
+    router.push('/cart');
   };
+  if (isCartScreen) return null;
   return (
     <Pressable
       onPress={onPress}
@@ -16,7 +21,9 @@ const CartIcon = () => {
     >
       <AntDesign name="shoppingcart" color="white" size={23} />
       <View style={styles.abs}>
-        <Text style={{ fontSize: 10, color: 'white' }}>{cartItemLength}</Text>
+        <Text style={{ fontSize: 10, color: 'white', fontWeight: 'bold' }}>
+          {cartItemLength}
+        </Text>
       </View>
     </Pressable>
   );

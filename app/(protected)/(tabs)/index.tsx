@@ -6,7 +6,7 @@ import { Wrapper } from '@/components/ui/Wrapper';
 
 import { useGetAllProducts } from '@/lib/tanstack/queries';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Button, Text, View } from 'react-native';
 
 export default function Home() {
@@ -16,6 +16,14 @@ export default function Home() {
 
   const onClear = () => setvalue('');
   const onChange = (value: string) => setvalue(value);
+  const filteredProducts = useMemo(() => {
+    if (!value) return data?.products || [];
+    return (
+      data?.products?.filter((product) =>
+        product.title.toLowerCase().includes(value.toLowerCase())
+      ) || []
+    );
+  }, [data?.products, value]);
   if (isError) {
     return <ErrorComponent onRefetch={refetch} />;
   }
@@ -24,7 +32,7 @@ export default function Home() {
   return (
     <Wrapper>
       <SearchInput onChange={onChange} value={value} onClear={onClear} />
-      <Products data={data.products} />
+      <Products data={filteredProducts} />
     </Wrapper>
   );
 }

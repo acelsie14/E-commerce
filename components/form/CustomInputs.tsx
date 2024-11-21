@@ -38,7 +38,7 @@ const CustomInputs = ({
   style,
 }: Props) => {
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       {label && <Text style={styles.label}>{label}</Text>}
       <View style={[styles.container, style]}>
         <TextInput
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderWidth: 0,
     fontSize: 20,
-    flex: 1,
   },
   label: {
     color: colors.dark,

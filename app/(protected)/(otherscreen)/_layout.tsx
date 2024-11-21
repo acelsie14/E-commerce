@@ -28,12 +28,14 @@ const OtherScreenLayout = () => {
             </Pressable>
           ),
           headerRight: () => <CartIcon />,
+          headerTitleAlign: 'center',
         }}
       >
         <Stack.Screen
           name="product/[id]"
           options={{ title: 'Product Detail' }}
         />
+        <Stack.Screen name="cart" options={{ title: 'cart' }} />
       </Stack>
     </>
   );

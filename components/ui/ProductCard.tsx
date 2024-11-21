@@ -4,6 +4,7 @@ import { trimText } from '@/utils';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import Favorite from './Favorite';
 
 type Props = {
   product: ProductResponse;
@@ -41,6 +42,7 @@ export const ProductCard = ({
           opacity: pressed ? 0.5 : 1,
           width,
           height: height ? height : 400,
+          paddingBottom: 20,
         },
       ]}
     >
@@ -60,7 +62,17 @@ export const ProductCard = ({
       </View>
       <View style={{ gap: 10 }}>
         <Text style={styles.title}>{trimText(product.title)}</Text>
-        {!width && <Text>{product.category}</Text>}
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          {!width && <Text>{product.category}</Text>}
+          <Favorite
+            favProducts={{
+              id: product.id,
+              images: product.images,
+              price: product.price,
+              title: product.title,
+            }}
+          />
+        </View>
         <Text
           style={{
             textDecorationLine: thereIsDiscount ? 'line-through' : 'none',
@@ -70,6 +82,7 @@ export const ProductCard = ({
         >
           ₦{product.price}
         </Text>
+
         {thereIsDiscount && (
           <Text style={{ fontWeight: 'bold' }}>₦{priceWithDiscount}</Text>
         )}
