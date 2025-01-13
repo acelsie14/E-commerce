@@ -34,7 +34,7 @@ const ProfileDetailsScreen = () => {
             width: 80,
           }}
         >
-          <Text style={{ justifyContent: 'center' }}>Edit Profile</Text>
+          <Text style={{ justifyContent: 'center' }}>Edit Profiles</Text>
         </TouchableOpacity>
       </View>
       <View>
