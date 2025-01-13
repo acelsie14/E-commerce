@@ -18,7 +18,7 @@ export const SimilarProducts = ({ product }: Props): JSX.Element => {
         horizontal
         data={product}
         renderItem={({ item }) => (
-          <ProductCard product={item} width={width * 0.5} height={300} />
+          <ProductCard product={item} width={width * 0.5} height={400} />
         )}
         showsHorizontalScrollIndicator={false}
       />

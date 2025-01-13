@@ -19,6 +19,7 @@ type Props = {};
 const favorite = ({}: Props) => {
   const favorite = useFavStore((state) => state.favorite);
   const router = useRouter();
+
   return (
     <Wrapper>
       <Text style={styles.header}>Favorites</Text>
@@ -35,6 +36,7 @@ const favorite = ({}: Props) => {
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => router.push(`/product/${item.id}`)}
+              style={styles.card}
             >
               <View>
                 <Image
@@ -44,6 +46,7 @@ const favorite = ({}: Props) => {
                   contentFit="cover"
                   placeholderContentFit="contain"
                 />
+
                 <Text>{item.title}</Text>
                 <View
                   style={{
@@ -83,5 +86,24 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: '400',
     paddingHorizontal: 10,
+  },
+  card: {
+    backgroundColor: 'white',
+    flex: 1,
+    elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    borderRadius: 5,
+
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'gray',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginBottom: 10,
   },
 });

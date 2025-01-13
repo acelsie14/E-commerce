@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
   inputStyle: {
     backgroundColor: 'transparent',
     borderWidth: 0,
-    fontSize: 20,
+    color: colors.dark,
+    flex: 1,
   },
   label: {
     color: colors.dark,

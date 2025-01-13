@@ -6,7 +6,7 @@ import { colors } from '@/constants';
 
 type favProductProps = {
   favProducts: {
-    images: string[];
+    images: string;
     id: number;
     title: string;
     price: number;

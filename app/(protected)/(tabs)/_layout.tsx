@@ -1,10 +1,15 @@
 import CartIcon from '@/components/CartIcons';
 import TabsIcon from '@/components/TabsIcon';
 import { colors } from '@/constants';
-import { Tabs } from 'expo-router';
-import { StatusBar } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import { Tabs, useRouter } from 'expo-router';
+import { Pressable, StatusBar, Text } from 'react-native';
 
 export default function TabsLayout() {
+  const router = useRouter();
+  const onPress = () => {
+    router.navigate('/account');
+  };
   return (
     //@ts-ignore
     <>
@@ -31,26 +36,7 @@ export default function TabsLayout() {
             ),
           }}
         />
-        <Tabs.Screen
-          name="menu"
-          options={{
-            title: '',
-            tabBarLabel: 'Menu',
-            tabBarIcon: ({ focused, size }) => (
-              <TabsIcon name="bars" size={size} focused={focused} />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="more"
-          options={{
-            title: '',
-            tabBarLabel: 'More',
-            tabBarIcon: ({ focused, size }) => (
-              <TabsIcon name="amazon" size={size} focused={focused} />
-            ),
-          }}
-        />
+
         <Tabs.Screen
           name="account"
           options={{
@@ -68,6 +54,19 @@ export default function TabsLayout() {
             tabBarLabel: 'Favorite',
             tabBarIcon: ({ focused, size }) => (
               <TabsIcon name="hearto" size={size} focused={focused} />
+            ),
+            headerLeft: () => (
+              <Pressable
+                onPress={onPress}
+                style={({ pressed }) => [
+                  {
+                    opacity: pressed ? 0.5 : 1,
+                  },
+                  { paddingLeft: 10 },
+                ]}
+              >
+                <AntDesign name="arrowleft" size={30} color={'white'} />
+              </Pressable>
             ),
           }}
         />

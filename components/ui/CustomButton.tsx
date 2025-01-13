@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Pressable,
   StyleProp,
   StyleSheet,
@@ -15,6 +16,7 @@ type Props = {
   disabled?: boolean;
   style?: StyleProp<ViewStyle>;
   color?: string;
+  isLoading?: boolean;
 };
 
 const CustomButton = ({
@@ -23,6 +25,7 @@ const CustomButton = ({
   disabled,
   style,
   color,
+  isLoading,
 }: Props) => {
   return (
     <Pressable
@@ -33,7 +36,11 @@ const CustomButton = ({
         { opacity: pressed || disabled ? 0.5 : 1 },
       ]}
     >
-      <Text style={[styles.title, { color }]}>{buttonTitle}</Text>
+      {isLoading ? (
+        <ActivityIndicator size={20} color={colors.yellow} />
+      ) : (
+        <Text style={[styles.title, { color }]}>{buttonTitle}</Text>
+      )}
     </Pressable>
   );
 };
@@ -47,7 +54,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.yellow,
-    width: 300,
   },
   title: {
     color: colors.dark,

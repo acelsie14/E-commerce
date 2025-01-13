@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 export type Product = {
-  images: string[];
+  images: string;
   id: number;
   title: string;
   price: number;

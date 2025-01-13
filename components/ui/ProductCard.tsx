@@ -67,7 +67,7 @@ export const ProductCard = ({
           <Favorite
             favProducts={{
               id: product.id,
-              images: product.images,
+              images: product.thumbnail,
               price: product.price,
               title: product.title,
             }}

@@ -1,4 +1,4 @@
-import { ProductResponse, ProductType } from '@/type';
+import { ProductResponse, ProductType, User } from '@/type';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -27,6 +27,15 @@ export const useGetSimilarProducts = (category: string) => {
       const { data } = await axios(
         `https://dummyjson.com/products/category/${category}?limit=6`
       );
+      return data;
+    },
+  });
+};
+export const useUserInfo = (id: string) => {
+  return useQuery<User>({
+    queryKey: ['User_Info', id],
+    queryFn: async () => {
+      const { data } = await axios(`https://dummyjson.com/users/${id}`);
       return data;
     },
   });
