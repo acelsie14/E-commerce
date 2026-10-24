@@ -6,7 +6,7 @@ import "dotenv/config";
 export const registerUser = async (req, res) => {
 
     try{
-        const{name,email,password,phoneNumber} = req.body;
+        const{name,email,password,phoneNumber,role} = req.body;
 
     if(!name || !email || !password|| !phoneNumber){
         return res.status(400).json({message: "Please provide all required fields"});
@@ -29,6 +29,7 @@ export const registerUser = async (req, res) => {
         email,
         password,
         phoneNumber,
+        role
     });
     await user.save();
 
